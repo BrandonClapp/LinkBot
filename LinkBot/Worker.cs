@@ -23,7 +23,6 @@ namespace WorkerService
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                
                 var client = new DiscordSocketClient();
 
                 client.Log += Log;
@@ -36,19 +35,19 @@ namespace WorkerService
                 client.MessageReceived += ClientOnMessageReceived;
                 
                 // Block this task until the program is closed.
-                await Task.Delay(-1);
+                await Task.Delay(-1, stoppingToken);
             }
         }
 
         private Task ClientOnMessageReceived(SocketMessage message)
         {
-            _logger.LogInformation(message.Content);
+            _logger.LogInformation("{Message}", message.Content);
             return Task.CompletedTask;
         }
 
-        private Task Log(LogMessage arg)
+        private Task Log(LogMessage message)
         {
-            _logger.LogInformation(arg.Message);
+            _logger.LogInformation("{Message}", message.Message);
             return Task.CompletedTask;
         }
     }

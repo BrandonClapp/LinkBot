@@ -20,6 +20,7 @@ namespace WorkerService
                     builder
                         .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                         .AddJsonFile("appsettings.Development.json", optional: false, reloadOnChange: true)
+                        // Environment variables need to popular BotConfig__Token
                         .AddEnvironmentVariables();
                 })
                 .ConfigureServices((hostContext, services) =>
