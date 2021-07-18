@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace WorkerService.Models
@@ -8,6 +9,7 @@ namespace WorkerService.Models
         public string Description { get; set; }
         public string Uri { get; set; }
         public string ImageUri { get; set; }
+        public DateTime CreatedAt { get; set; }
         public IEnumerable<string> Keywords { get; set; }
     }
 }

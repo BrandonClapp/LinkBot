@@ -50,13 +50,9 @@ namespace WorkerService
                 .Where(link => link is not null)
                 .Select(link => _analyzer.Analyze(link));
             
-            // Save links in database.
-            // var existing = await _data.GetLinks();
-
             var linkPreviews = linkData as LinkPreview[] ?? linkData.ToArray();
             if (linkPreviews.Any())
             {
-
                 foreach (var link in linkPreviews)
                 {
                     // Save each link to the database.

@@ -1,4 +1,5 @@
 using FluentMigrator;
+using FluentMigrator.Postgres;
 
 namespace WorkerService.Migrations
 {
@@ -10,10 +11,12 @@ namespace WorkerService.Migrations
         {
             // throw new System.NotImplementedException();
             Create.Table("links")
-                .WithColumn("id").AsInt64().PrimaryKey()
+                .WithColumn("id").AsInt64().PrimaryKey().Identity()
                 .WithColumn("title").AsString()
-                .WithColumn("description").AsString()
-                .WithColumn("uri").AsString();
+                .WithColumn("description").AsString().Nullable()
+                .WithColumn("uri").AsString().Unique()
+                .WithColumn("image_uri").AsString().Nullable()
+                .WithColumn("created_at").AsDateTime();
         }
 
         public override void Down()

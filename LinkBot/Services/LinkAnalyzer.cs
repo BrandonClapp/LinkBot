@@ -30,12 +30,23 @@ namespace WorkerService.Services
                 var keywords = htmlDoc.DocumentNode.SelectSingleNode("//meta[@name='keywords']")?.Attributes["content"]
                     ?.Value;
 
+                if (string.IsNullOrWhiteSpace(desc))
+                {
+                    desc = htmlDoc.DocumentNode.SelectSingleNode("//meta[@property='og:description']")
+                        ?.Attributes["content"]?.Value;
+                }
+                
+                title = HtmlEntity.DeEntitize(title);
+                desc = HtmlEntity.DeEntitize(desc);
+                image = HtmlEntity.DeEntitize(image);
+                
                 return new LinkPreview()
                 {
                     Title = title,
                     Description = desc,
                     Uri = url,
                     ImageUri = image,
+                    CreatedAt = DateTime.UtcNow,
                     Keywords = new List<string>(keywords?.Split(",") ?? Array.Empty<string>())
                 };
             }
