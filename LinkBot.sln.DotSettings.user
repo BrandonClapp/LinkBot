@@ -2,5 +2,7 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=dcb85886_002D2db2_002D4c6b_002Da074_002Dd12c748f0c60/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CanIdentifyHttpMessage" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;xUnit::FA4ED856-AC19-4A24-8373-60BDE8D1CEE8::net5.0::LinkBot.Tests.HttpMessageParserTests&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::FA4ED856-AC19-4A24-8373-60BDE8D1CEE8::net5.0::LinkBot.Tests.LinkAnalyzerTests.AnalyzeLink&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::FA4ED856-AC19-4A24-8373-60BDE8D1CEE8::net5.0::LinkBot.Tests.LinkAnalyzerTests.AnalyzeBadLink&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

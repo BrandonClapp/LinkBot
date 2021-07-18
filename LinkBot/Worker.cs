@@ -13,6 +13,7 @@ namespace WorkerService
         private readonly ILogger<Worker> _logger;
         private readonly IOptions<BotConfig> _config;
         private readonly LinkMessageHandler _linkMessageHandler;
+        private DiscordSocketClient _client;
 
         public Worker(ILogger<Worker> logger, IOptions<BotConfig> config, LinkMessageHandler linkMessageHandler)
         {
@@ -25,16 +26,16 @@ namespace WorkerService
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                var client = new DiscordSocketClient();
+                _client = new DiscordSocketClient();
 
-                client.Log += Log;
+                _client.Log += Log;
 
                 var token = _config.Value.Token;
 
-                await client.LoginAsync(TokenType.Bot, token);
-                await client.StartAsync();
+                await _client.LoginAsync(TokenType.Bot, token);
+                await _client.StartAsync();
                 
-                client.MessageReceived += ClientOnMessageReceived;
+                _client.MessageReceived += ClientOnMessageReceived;
                 
                 // Block this task until the program is closed.
                 await Task.Delay(-1, stoppingToken);
@@ -43,6 +44,11 @@ namespace WorkerService
 
         private async Task ClientOnMessageReceived(SocketMessage message)
         {
+            if (message.Author.IsBot)
+            {
+                return;
+            }
+            
             await _linkMessageHandler.Handle(message);
         }
 

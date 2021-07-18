@@ -1,10 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Discord;
 using Discord.WebSocket;
 using Microsoft.Extensions.Logging;
+using WorkerService.Models;
 using WorkerService.Services;
 
 namespace WorkerService
@@ -13,27 +16,48 @@ namespace WorkerService
     {
         private readonly ILogger<LinkMessageHandler> _logger;
         private readonly HttpMessageParser _parser;
+        private readonly LinkAnalyzer _analyzer;
 
-        private List<string> _links = new();
-
-        public LinkMessageHandler(ILogger<LinkMessageHandler> logger, HttpMessageParser parser)
+        // TODO: Extract this data.
+        private Dictionary<string, string> _icons = new Dictionary<string, string>()
+        {
+            ["link"] = "\uD83D\uDD17",
+            ["2"] = ":two:",
+            ["3"] = "\u0033",
+            ["4"] = "\u0034",
+            ["5"] = "\u0035",
+            ["6"] = "\u0036",
+            ["7"] = "\u0037",
+            ["8"] = "\u0038",
+            ["9"] = "\u0039",
+        };
+        
+        public LinkMessageHandler(ILogger<LinkMessageHandler> logger, HttpMessageParser parser, LinkAnalyzer analyzer)
         {
             _logger = logger;
             _parser = parser;
+            _analyzer = analyzer;
         }
         
         public async Task Handle(SocketMessage message)
         {
             _logger.LogInformation("Handling message: {Message}", message.Content);
             var links = await _parser.GetLinks(message.Content);
+
+            var linkData = links
+                .Where(link => link is not null)
+                .Select(link => _analyzer.Analyze(link));
             
-            // Log links to database.
-            _links.AddRange(links);
-            
-            // TODO: Analyze all of the links.
-            // Title, URL, Tags
-            
-            await Task.Run(() => { });
+            // Save links in database.
+
+
+            var linkPreviews = linkData as LinkPreview[] ?? linkData.ToArray();
+            if (linkPreviews.Any())
+            {
+                await message.AddReactionAsync(new Emoji(_icons["link"]), RequestOptions.Default);
+            }
+
+            // await message.Channel.SendMessageAsync($"Saved {linkPreviews.Length} links.");
         }
     }
 }

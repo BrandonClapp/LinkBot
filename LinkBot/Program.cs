@@ -29,8 +29,12 @@ namespace WorkerService
                     // Add functionality to inject IOptions<T>
                     services.AddOptions();
                     services.Configure<BotConfig>(hostContext.Configuration.GetSection("BotConfig"));
+                    
                     services.AddSingleton<LinkMessageHandler>();
                     services.AddSingleton<HttpMessageParser>();
+                    
+                    services.AddTransient<LinkAnalyzer>();
+                    
                     services.AddHostedService<Worker>();
                 });
     }
