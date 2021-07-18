@@ -12,11 +12,13 @@ namespace WorkerService
     {
         private readonly ILogger<Worker> _logger;
         private readonly IOptions<BotConfig> _config;
+        private readonly LinkMessageHandler _linkMessageHandler;
 
-        public Worker(ILogger<Worker> logger, IOptions<BotConfig> config)
+        public Worker(ILogger<Worker> logger, IOptions<BotConfig> config, LinkMessageHandler linkMessageHandler)
         {
             _logger = logger;
             _config = config;
+            _linkMessageHandler = linkMessageHandler;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -39,10 +41,9 @@ namespace WorkerService
             }
         }
 
-        private Task ClientOnMessageReceived(SocketMessage message)
+        private async Task ClientOnMessageReceived(SocketMessage message)
         {
-            _logger.LogInformation("{Message}", message.Content);
-            return Task.CompletedTask;
+            await _linkMessageHandler.Handle(message);
         }
 
         private Task Log(LogMessage message)

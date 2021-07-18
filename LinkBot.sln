@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkBot.UI", "LinkBot.UI\Li
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkBot", "LinkBot\LinkBot.csproj", "{24932ED4-90E3-4C0C-A3AC-799EC9941C41}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkBot.Tests", "LinkBot.Tests\LinkBot.Tests.csproj", "{FA4ED856-AC19-4A24-8373-60BDE8D1CEE8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{24932ED4-90E3-4C0C-A3AC-799EC9941C41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24932ED4-90E3-4C0C-A3AC-799EC9941C41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24932ED4-90E3-4C0C-A3AC-799EC9941C41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA4ED856-AC19-4A24-8373-60BDE8D1CEE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA4ED856-AC19-4A24-8373-60BDE8D1CEE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA4ED856-AC19-4A24-8373-60BDE8D1CEE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA4ED856-AC19-4A24-8373-60BDE8D1CEE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
