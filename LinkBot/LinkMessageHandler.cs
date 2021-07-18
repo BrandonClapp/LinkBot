@@ -17,6 +17,7 @@ namespace WorkerService
         private readonly ILogger<LinkMessageHandler> _logger;
         private readonly HttpMessageParser _parser;
         private readonly LinkAnalyzer _analyzer;
+        private readonly LinkData _data;
 
         // TODO: Extract this data.
         private Dictionary<string, string> _icons = new Dictionary<string, string>()
@@ -32,11 +33,12 @@ namespace WorkerService
             ["9"] = "\u0039",
         };
         
-        public LinkMessageHandler(ILogger<LinkMessageHandler> logger, HttpMessageParser parser, LinkAnalyzer analyzer)
+        public LinkMessageHandler(ILogger<LinkMessageHandler> logger, HttpMessageParser parser, LinkAnalyzer analyzer, LinkData data)
         {
             _logger = logger;
             _parser = parser;
             _analyzer = analyzer;
+            _data = data;
         }
         
         public async Task Handle(SocketMessage message)
@@ -49,6 +51,7 @@ namespace WorkerService
                 .Select(link => _analyzer.Analyze(link));
             
             // Save links in database.
+            var existing = await _data.GetLinks(); 
 
 
             var linkPreviews = linkData as LinkPreview[] ?? linkData.ToArray();

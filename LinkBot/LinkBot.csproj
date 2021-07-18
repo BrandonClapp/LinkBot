@@ -8,8 +8,17 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Dapper" Version="2.0.90" />
         <PackageReference Include="Discord.Net" Version="2.4.0" />
+        <PackageReference Include="FluentMigrator" Version="3.2.17" />
+        <PackageReference Include="FluentMigrator.Runner" Version="3.2.17" />
+        <PackageReference Include="FluentMigrator.Runner.Postgres" Version="3.2.17" />
         <PackageReference Include="HtmlAgilityPack" Version="1.11.34" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+        <PackageReference Include="Npgsql" Version="6.0.0-preview5" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Entities" />
     </ItemGroup>
 </Project>
