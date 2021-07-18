@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Dapper;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Options;
+using Npgsql;
 using WorkerService.Models;
 
 namespace WorkerService
@@ -23,7 +24,7 @@ namespace WorkerService
         {
             try
             {
-                await using var conn = new SqlConnection(_connString);
+                await using var conn = new NpgsqlConnection(_connString);
                 var links = await conn.QueryAsync<LinkPreview>("SELECT * FROM links");
                 return links;
             }
@@ -32,6 +33,20 @@ namespace WorkerService
                 Console.WriteLine(e);
                 throw;
             }
+        }
+
+        public async Task SaveLink(LinkPreview link)
+        {
+            await using var conn = new NpgsqlConnection(_connString);
+            await conn.ExecuteAsync(@"
+                    insert into links (id, title, description, uri)
+                    values (0, @Title, @Desc, @Uri);", new
+            {
+                Title = link.Title,
+                Desc = link.Description,
+                Image = link.ImageUri,
+                Uri = link.Uri,
+            });
         }
     }
 }

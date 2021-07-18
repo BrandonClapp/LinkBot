@@ -51,12 +51,18 @@ namespace WorkerService
                 .Select(link => _analyzer.Analyze(link));
             
             // Save links in database.
-            var existing = await _data.GetLinks(); 
-
+            // var existing = await _data.GetLinks();
 
             var linkPreviews = linkData as LinkPreview[] ?? linkData.ToArray();
             if (linkPreviews.Any())
             {
+
+                foreach (var link in linkPreviews)
+                {
+                    // Save each link to the database.
+                    await _data.SaveLink(link);
+                }
+                
                 await message.AddReactionAsync(new Emoji(_icons["link"]), RequestOptions.Default);
             }
 

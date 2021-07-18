@@ -34,6 +34,7 @@ namespace WorkerService.Services
                 {
                     Title = title,
                     Description = desc,
+                    Uri = url,
                     ImageUri = image,
                     Keywords = new List<string>(keywords?.Split(",") ?? Array.Empty<string>())
                 };
