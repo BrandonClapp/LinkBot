@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Dapper;
+using LinkBot.Models;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Options;
 using Npgsql;
-using WorkerService.Models;
 
-namespace WorkerService
+namespace LinkBot.Data
 {
     public class LinkData
     {

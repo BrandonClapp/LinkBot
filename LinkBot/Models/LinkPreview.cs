@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace WorkerService.Models
+namespace LinkBot.Models
 {
     public class LinkPreview
     {

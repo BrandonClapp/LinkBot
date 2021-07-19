@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace WorkerService
+namespace LinkBot
 {
     public class Worker : BackgroundService
     {
@@ -36,6 +36,8 @@ namespace WorkerService
                 await _client.StartAsync();
                 
                 _client.MessageReceived += ClientOnMessageReceived;
+                // TODO: When message is updated or deleted.
+                // TODO: Add tags for like #csharp #dotnet #angular
                 
                 // Block this task until the program is closed.
                 await Task.Delay(-1, stoppingToken);

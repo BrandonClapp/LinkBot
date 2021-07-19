@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Threading.Tasks;
 using HtmlAgilityPack;
-using WorkerService.Models;
+using LinkBot.Models;
 
-namespace WorkerService.Services
+namespace LinkBot.Services
 {
     public class LinkAnalyzer
     {

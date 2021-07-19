@@ -1,4 +1,4 @@
-namespace WorkerService
+namespace LinkBot
 {
     public class BotConfig
     {

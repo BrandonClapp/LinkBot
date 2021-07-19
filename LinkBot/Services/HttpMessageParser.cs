@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace WorkerService.Services
+namespace LinkBot.Services
 {
     public class HttpMessageParser
     {

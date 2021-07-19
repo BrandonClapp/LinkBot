@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using WorkerService.Services;
-
 using FluentMigrator.Runner;
 using FluentMigrator.Runner.Initialization;
-using WorkerService.Migrations;
+using LinkBot.Migrations;
+using LinkBot.Services;
 
-namespace WorkerService
+namespace LinkBot
 {
     public class Program
     {

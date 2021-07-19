@@ -6,11 +6,12 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
+using LinkBot.Data;
+using LinkBot.Models;
+using LinkBot.Services;
 using Microsoft.Extensions.Logging;
-using WorkerService.Models;
-using WorkerService.Services;
 
-namespace WorkerService
+namespace LinkBot
 {
     public class LinkMessageHandler
     {

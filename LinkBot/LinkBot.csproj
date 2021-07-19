@@ -4,7 +4,6 @@
         <TargetFramework>net5.0</TargetFramework>
         <UserSecretsId>dotnet-WorkerService-D56E49B9-FD80-464E-B9C4-1C82420FEE33</UserSecretsId>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-        <RootNamespace>WorkerService</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -16,9 +15,5 @@
         <PackageReference Include="HtmlAgilityPack" Version="1.11.34" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
         <PackageReference Include="Npgsql" Version="6.0.0-preview5" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Entities" />
     </ItemGroup>
 </Project>

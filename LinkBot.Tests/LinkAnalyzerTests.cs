@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using WorkerService.Services;
+using LinkBot.Services;
 using Xunit;
 
 namespace LinkBot.Tests

@@ -1,7 +1,7 @@
 using FluentMigrator;
 using FluentMigrator.Postgres;
 
-namespace WorkerService.Migrations
+namespace LinkBot.Migrations
 {
     // How does this know about connection string?..
     [Migration(1)]
