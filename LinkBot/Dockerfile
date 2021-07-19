@@ -3,8 +3,8 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["LinkBot.csproj", "LinkBot/"]
-RUN dotnet restore "LinkBot.csproj"
+COPY ["LinkBot/LinkBot.csproj", "LinkBot/"]
+RUN dotnet restore "LinkBot/LinkBot.csproj"
 COPY . .
 WORKDIR "/src/LinkBot"
 RUN dotnet build "LinkBot.csproj" -c Release -o /app/build
