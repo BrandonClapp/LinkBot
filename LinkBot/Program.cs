@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using FluentMigrator.Runner;
 using FluentMigrator.Runner.Initialization;
+using LinkBot.Data;
 using LinkBot.Migrations;
 using LinkBot.Services;
 

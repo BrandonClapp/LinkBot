@@ -51,6 +51,7 @@ namespace LinkBot.Services
             }
             catch (WebException ex)
             {
+                Console.WriteLine(ex.Message);
                 return null;
             }
         }
