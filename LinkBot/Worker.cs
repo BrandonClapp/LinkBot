@@ -50,7 +50,7 @@ namespace LinkBot
             {
                 return;
             }
-            
+
             await _linkMessageHandler.Handle(message);
         }
 

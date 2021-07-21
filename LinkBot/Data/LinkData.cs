@@ -13,8 +13,7 @@ namespace LinkBot.Data
     public class LinkData
     {
         private readonly string _connString;
-
-        // Can we inject HttpClient into here? How?
+        
         public LinkData(IOptions<BotConfig> config)
         {
             _connString = config.Value.ConnectionString;
@@ -40,10 +39,9 @@ namespace LinkBot.Data
             try
             {
                 await using var conn = new NpgsqlConnection(_connString);
-                // TODO: SQL make sure the uri doesn't already exist
                 await conn.ExecuteAsync(@"
-                  insert into links (title, description, uri, image_uri, created_at)
-                    values (@Title, @Desc, @Uri, @ImageUri, @CreatedAt) 
+                  insert into links (title, description, uri, image_uri, created_at, server_id, server_name, channel_id, channel_name, author_id, author_name)
+                    values (@Title, @Desc, @Uri, @ImageUri, @CreatedAt, @ServerId, @ServerName, @ChannelId, @ChannelName, @AuthorId, @AuthorName) 
                     ON CONFLICT DO NOTHING;
             ", new
                 {
@@ -52,7 +50,13 @@ namespace LinkBot.Data
                     Image = link.ImageUri,
                     Uri = link.Uri,
                     ImageUri = link.ImageUri,
-                    CreatedAt = link.CreatedAt
+                    CreatedAt = link.CreatedAt,
+                    ServerId = link.ServerId,
+                    ServerName = link.ServerName,
+                    ChannelId = link.ChannelId,
+                    ChannelName = link.ChannelName,
+                    AuthorId = link.AuthorId,
+                    AuthorName = link.AuthorName
                 });
             }
             catch (Exception e)

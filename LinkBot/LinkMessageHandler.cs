@@ -45,11 +45,35 @@ namespace LinkBot
         public async Task Handle(SocketMessage message)
         {
             _logger.LogInformation("Handling message: {Message}", message.Content);
+            
+            var channel = message.Channel as SocketTextChannel;
+            
+            // TODO: Add these columns to the database.
+            var messageInfo = new
+            {
+                ChannelId = message.Channel.Id,
+                ChannelName = message.Channel.Name,
+                ServerId = channel?.Guild.Id,
+                ServerName = channel?.Guild.Name,
+                AuthorId = message.Author.Id,
+                AuthorName = $"{message.Author.Username}#{message.Author.Discriminator}"
+            };
+            
             var links = await _parser.GetLinks(message.Content);
 
             var linkData = links
                 .Where(link => link is not null)
-                .Select(link => _analyzer.Analyze(link));
+                .Select(link =>
+                {
+                    var preview = _analyzer.Analyze(link);
+                    preview.ServerId = messageInfo.ServerId.ToString();
+                    preview.ServerName = messageInfo.ServerName;
+                    preview.ChannelId = messageInfo.ChannelId.ToString();
+                    preview.ChannelName = messageInfo.ChannelName;
+                    preview.AuthorId = messageInfo.AuthorId.ToString();
+                    preview.AuthorName = messageInfo.AuthorName;
+                    return preview;
+                });
             
             var linkPreviews = linkData as LinkPreview[] ?? linkData.ToArray();
             if (linkPreviews.Any())
